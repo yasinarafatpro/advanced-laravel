@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Billing\PaymentGetway;
+use App\Billing\BankPaymentGetway;
+use App\Billing\CreditPaymentGetway;
+use App\Billing\PaymentGetwayContract;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,8 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(PaymentGetway::class,function($app){
-            return new PaymentGetway(currency:'usd');
+
+        $this->app->singleton(PaymentGetwayContract::class,function($app){
+            if(request()->has('credit')){
+                return new CreditPaymentGetway(currency:'usd');
+            }
+            return new BankPaymentGetway(currency:'usd');
+            
         });
     }
 

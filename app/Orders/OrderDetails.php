@@ -1,15 +1,15 @@
 <?php
 namespace App\Orders;
 
-use App\Billing\PaymentGetway;
+use App\Billing\PaymentGetwayContract;
 
 class OrderDetails{
 
     private $paymentGetway;
 
-    public function __construct(PaymentGetway $paymentGetway)
+    public function __construct(PaymentGetwayContract $bankPaymentGetway)
     {
-        $this->paymentGetway = $paymentGetway;
+        $this->paymentGetway = $bankPaymentGetway;
     }
     public function all(){
         $this->paymentGetway->setDiscount(500);

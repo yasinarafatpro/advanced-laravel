@@ -3,7 +3,7 @@ namespace App\Billing;
 
 use Illuminate\Support\Str;
 
-class PaymentGetway{
+class BankPaymentGetway implements PaymentGetwayContract{
 
     private $currency;
     private $discount;
