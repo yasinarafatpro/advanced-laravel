@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,5 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/task',[TaskController::class,'store']);
+Route::get('/task/getall',[TaskController::class,'index']);
+Route::get('/task/getbyid/{id}',[TaskController::class,'show']);
+Route::get('/task/update/{id}',[TaskController::class,'update']);
+Route::get('/task/delete/{id}',[TaskController::class,'destroy']);
 require __DIR__.'/auth.php';
